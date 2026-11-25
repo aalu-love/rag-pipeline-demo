@@ -19,6 +19,8 @@ class Settings:
 
     chunk_size: int = int(os.getenv("CHUNK_SIZE", "500"))
     chunk_overlap: int = int(os.getenv("CHUNK_OVERLAP", "80"))
+    splitter: str = os.getenv("SPLITTER", "recursive")  # recursive | scene | auto
+    scene_max_chars: int = int(os.getenv("SCENE_MAX_CHARS", "1200"))
     top_k: int = int(os.getenv("TOP_K", "6"))  # chunks sent to the LLM
     fetch_k: int = int(os.getenv("FETCH_K", "10"))  # candidates per query before fusion
     multi_query: int = int(os.getenv("MULTI_QUERY", "3"))  # LLM rewrites per question; 0 = off

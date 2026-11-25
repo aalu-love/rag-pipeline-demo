@@ -6,8 +6,7 @@ from langchain_core.documents import Document
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
-from langchain_text_splitters import RecursiveCharacterTextSplitter
-
+from .chunking import split_documents
 from .config import settings
 from .loaders import load_sources
 from .store import get_vector_store
@@ -29,12 +28,7 @@ PROMPT = ChatPromptTemplate.from_messages(
 
 def ingest(sources: list[str]) -> int:
     docs = load_sources(sources)
-    splitter = RecursiveCharacterTextSplitter(
-        chunk_size=settings.chunk_size,
-        chunk_overlap=settings.chunk_overlap,
-        add_start_index=True,
-    )
-    chunks = splitter.split_documents(docs)
+    chunks = split_documents(docs)
     # Deterministic IDs: re-ingesting the same source overwrites instead of duplicating.
     ids = [
         str(uuid.uuid5(uuid.NAMESPACE_URL, f"{c.metadata['source']}#{c.metadata['start_index']}"))
