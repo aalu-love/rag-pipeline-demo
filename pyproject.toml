@@ -1,0 +1,14 @@
+[project]
+name = "rag-pipe"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "beautifulsoup4>=4.15.0",
+    "fastembed>=0.9.1",
+    "langchain>=1.5.2",
+    "langchain-openai>=1.8.5",
+    "langchain-qdrant>=1.2.0",
+    "langchain-text-splitters>=1.2.0",
+    "python-dotenv>=1.2.4",
+    "qdrant-client>=1.15.1",
+]
